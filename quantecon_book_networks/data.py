@@ -170,7 +170,6 @@ def introduction():
     
     ## adjacency_matrix_2019
     data_file='data/csv_files/adjacency_matrix_31-12-2019.csv'
-    data_file = pkg_resources.resource_stream(__name__, data_file)
     ch_data["adjacency_matrix_2019"] = read_Z(data_file, t=0)
 
     return ch_data
@@ -209,14 +208,14 @@ def production():
     ch_data["us_sectors_15"] =  us_sectors_15
 
     data_file = 'data/csv_files/use_71_2019.csv'
-    data_file = pkg_resources.resource_stream(__name__, data_file)
     Z_71 = read_industry_Z(
         data_file, N=71,
          columnlist=['Unnamed: 0', 'T001', 'F010', 'F02E', 'F02N', 
                              'F02R', 'F02S', 'F030', 'F040', 'F06C', 'F06E', 
                              'F06N', 'F06S', 'F07C', 'F07E', 'F07N', 'F07S', 
                              'F10C', 'F10E', 'F10N', 'F10S', 'T019'])
-    X_71 = read_industry_X('data/csv_files/make_71_2019.csv', N=71)
+    data_file = 'data/csv_files/make_71_2019.csv'
+    X_71 = read_industry_X(data_file, N=71)
     A_71, F_71 = build_coefficient_matrices(Z_71, X_71)
 
     us_sectors_71 = {
@@ -298,13 +297,11 @@ def production():
     ch_data["us_sectors_71"] =  us_sectors_71
 
     data_file='data/csv_files/use_114_aus_17-18.csv'
-    data_file = pkg_resources.resource_stream(__name__, data_file)
     Z_114 = read_industry_Z(data_file,
                  N=114,
                  columnlist=None)
     
     data_file='data/csv_files/make_114_aus_17-18.csv'
-    data_file = pkg_resources.resource_stream(__name__, data_file)
     X_114 = read_industry_X(data_file, colname='total', N=114)
     A_114, F_114 = build_coefficient_matrices(Z_114, X_114)
 
