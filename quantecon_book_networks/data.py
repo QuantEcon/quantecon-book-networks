@@ -152,8 +152,8 @@ def introduction():
     ch_data["aircraft_network_2019"] = nx.read_gexf(data_file)
 
     data_file = "data/commercial-aircraft-sitcr2-7924-yr2019/sitcr2-7924-aircraft-network-2019-layout.json"
-    data_file = pkg_resources.resource_string(__name__, data_file)
-    f = open(data_file, "r")
+    data_file = pkg_resources.resource_stream(__name__, data_file)
+    f = open(data_file.name, "r")
     data = json.loads(f.read())
     pos = {}
     for nd in data['nodes']:
