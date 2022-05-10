@@ -7,3 +7,4 @@ Website: https://github.com/quantecon/book-networks
 
 __version__ = '0.3'
 
+from .configure import config
