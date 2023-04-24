@@ -108,9 +108,8 @@ def introduction():
     data_file = pkg_resources.resource_stream(__name__, data_file)
     crude_oil = pd.read_csv(data_file, dtype={'product_id': str})
 
-    exporters = crude_oil.groupby(by=["location_code"]).sum(numeric_only=True).sort_values("export_value", ascending=False)[:10].index
-
-    importers = crude_oil.groupby(by=["partner_code"]).sum(numeric_only=True).sort_values("export_value", ascending=False)[:21].index
+    exporters = crude_oil[["export_value", "location_code"]].groupby(by=["location_code"]).sum().sort_values("export_value", ascending=False)[:10].index
+    importers = crude_oil[["export_value", "partner_code"]].groupby(by=["partner_code"]).sum().sort_values("export_value", ascending=False)[:21].index
     importers = set(importers.drop("ANS"))
 
     # Aggregate Data for Rest of the World
@@ -124,7 +123,7 @@ def introduction():
     # Aggregate Partner Locations
     crude_oil.partner_code = crude_oil.partner_code.replace(to_replace=row_concord)
 
-    chart_data = crude_oil.groupby(by=["location_code", "partner_code"]).sum(numeric_only=True).reset_index()
+    chart_data = crude_oil[["export_value", "location_code", "partner_code"]].groupby(by=["location_code", "partner_code"]).sum().reset_index()
 
     # country data
     data_file = "data/crude_oil_sitcr2_3330_yr2019/regions-iso3c.csv"
