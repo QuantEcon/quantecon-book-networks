@@ -109,6 +109,7 @@ def introduction():
     crude_oil = pd.read_csv(data_file, dtype={'product_id': str})
 
     exporters = crude_oil[["export_value", "location_code"]].groupby(by=["location_code"]).sum().sort_values("export_value", ascending=False)[:10].index
+    
     importers = crude_oil[["export_value", "partner_code"]].groupby(by=["partner_code"]).sum().sort_values("export_value", ascending=False)[:21].index
     importers = set(importers.drop("ANS"))
 
