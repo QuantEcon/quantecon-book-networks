@@ -21,7 +21,7 @@ def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2019.csv', t=10):
 
     df2 = df1.replace(np.nan, 0)          # replace nan with 0
 
-    df3 = df2.replace("...", 0)          # replace ... with 0
+    df3 = df2.replace("---", 0)          # replace --- with 0
 
     countries = list(df3.index)
     countries = np.array(countries)
@@ -33,7 +33,7 @@ def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2019.csv', t=10):
     output = {'Z':Z,'Z_visual':Z_visual, 'countries':countries}
     return output
 
-def read_industry_Z(data_file='data/csv_files/use_15_2019.csv', 
+def read_industry_Z(data_file='data/csv_files/use_15_2021.csv', 
            N=15, 
            columnlist=['Name',
                        'Total Intermediate',
@@ -56,11 +56,11 @@ def read_industry_Z(data_file='data/csv_files/use_15_2019.csv',
         df3 = df2.drop(columns=columnlist)
     else:
         df3 = df2
-    df4 = df3.replace('...', 0)
+    df4 = df3.replace('---', 0)
     Z = np.asarray(df4.values.tolist(), dtype=np.float64)
     return Z
 
-def read_industry_X(data_file='data/csv_files/make_15_2019.csv',
+def read_industry_X(data_file='data/csv_files/supply_15_2021.csv',
            colname='Total Industry Output',
            N=15):
     """
@@ -207,14 +207,14 @@ def production():
 
     ch_data["us_sectors_15"] =  us_sectors_15
 
-    data_file = 'data/csv_files/use_71_2019.csv'
+    data_file = 'data/csv_files/use_71_2021.csv'
     Z_71 = read_industry_Z(
         data_file, N=71,
          columnlist=['Unnamed: 0', 'T001', 'F010', 'F02E', 'F02N', 
                              'F02R', 'F02S', 'F030', 'F040', 'F06C', 'F06E', 
                              'F06N', 'F06S', 'F07C', 'F07E', 'F07N', 'F07S', 
                              'F10C', 'F10E', 'F10N', 'F10S', 'T019'])
-    data_file = 'data/csv_files/make_71_2019.csv'
+    data_file = 'data/csv_files/make_71_2021.csv'
     X_71 = read_industry_X(data_file, N=71)
     A_71, F_71 = build_coefficient_matrices(Z_71, X_71)
 
@@ -296,12 +296,12 @@ def production():
 
     ch_data["us_sectors_71"] =  us_sectors_71
 
-    data_file='data/csv_files/use_114_aus_17-18.csv'
+    data_file='data/csv_files/use_114_aus_20-21.csv'
     Z_114 = read_industry_Z(data_file,
                  N=114,
                  columnlist=None)
     
-    data_file='data/csv_files/make_114_aus_17-18.csv'
+    data_file='data/csv_files/make_114_aus_20-21.csv'
     X_114 = read_industry_X(data_file, colname='total', N=114)
     A_114, F_114 = build_coefficient_matrices(Z_114, X_114)
 
