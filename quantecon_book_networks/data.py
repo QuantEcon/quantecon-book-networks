@@ -7,7 +7,7 @@ import json
 from pandas_datareader import wb
 
 ## Utilities
-def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2019.csv', t=10):
+def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2022.csv', t=10):
     """
     Build the Z matrix from the use table.
     
@@ -104,7 +104,7 @@ def introduction():
     ch_data = {}
 
     ## Crude oil
-    data_file = "data/crude_oil_sitcr2_3330_yr2019/data.csv"
+    data_file = "data/crude_oil_sitcr2_3330_yr2021/data.csv"
     data_file = pkg_resources.resource_stream(__name__, data_file)
     crude_oil = pd.read_csv(data_file, dtype={'product_id': str})
 
@@ -127,7 +127,7 @@ def introduction():
     chart_data = crude_oil.groupby(by=["location_code", "partner_code"]).sum().reset_index()
 
     # country data
-    data_file = "data/crude_oil_sitcr2_3330_yr2019/regions-iso3c.csv"
+    data_file = "data/crude_oil_sitcr2_3330_yr2021/regions-iso3c.csv"
     data_file = pkg_resources.resource_stream(__name__, data_file)
     cdata = pd.read_csv(data_file)
     country_names = cdata[["alpha-3","name"]].set_index("alpha-3").to_dict()['name']
@@ -169,7 +169,7 @@ def introduction():
     ch_data["forbes_global_2000"] = dfff
     
     ## adjacency_matrix_2019
-    data_file='data/csv_files/adjacency_matrix_31-12-2019.csv'
+    data_file='data/csv_files/adjacency_matrix_31-12-2022.csv'
     ch_data["adjacency_matrix_2019"] = read_Z(data_file, t=0)
 
     return ch_data
