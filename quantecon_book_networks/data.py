@@ -60,7 +60,7 @@ def read_industry_Z(data_file='data/csv_files/use_15_2021.csv',
     Z = np.asarray(df4.values.tolist(), dtype=np.float64)
     return Z
 
-def read_industry_X(data_file='data/csv_files/supply_15_2021.csv',
+def read_industry_X(data_file='data/csv_files/make_15_2021.csv',
            colname='Total Industry Output',
            N=15):
     """
