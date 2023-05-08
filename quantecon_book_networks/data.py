@@ -111,7 +111,8 @@ def introduction():
     exporters = crude_oil.groupby(by=["location_code"]).sum().sort_values("export_value", ascending=False)[:10].index
 
     importers = crude_oil.groupby(by=["partner_code"]).sum().sort_values("export_value", ascending=False)[:21].index
-    importers = set(importers.drop("ANS"))
+    # importers = set(importers.drop("ANS"))
+    importers = set(importers)
 
     # Aggregate Data for Rest of the World
     row_concord = {}
