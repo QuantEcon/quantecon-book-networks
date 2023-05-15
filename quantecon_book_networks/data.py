@@ -169,7 +169,7 @@ def introduction():
     dfff = dfff.sort_values('Market Value', ascending=False)
     ch_data["forbes_global_2000"] = dfff
     
-    ## adjacency_matrix_2019
+    ## adjacency_matrix_2022
     data_file='data/csv_files/adjacency_matrix_31-12-2022.csv'
     ch_data["adjacency_matrix_2019"] = read_Z(data_file, t=0)
 
@@ -428,7 +428,7 @@ def production():
 
     ## GDP growth rates and std. deviations
     varlist=['NY.GDP.MKTP.KD.ZG']; c='all'; s=1961; e=2020
-    countries = ['Canada', 'United States', 'United Kingdom', 'France', 'Japan', 
+    countries = ['Brazil', 'United States', 'United Kingdom', 'France', 'Japan', 
              'Indonesia', 'Argentina', 'Mexico', 'Australia', 'South Africa']
     
     gdp_df = wb.download(indicator=varlist, country=c, start=s, end=e)
