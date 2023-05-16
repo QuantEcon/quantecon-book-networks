@@ -164,3 +164,21 @@ def erdos_renyi_graph(n=100, p=0.5, seed=1234):
         if np.random.rand() < p:
             G.add_edge(*e)
     return G
+
+def compute_sums(D, sumtype="column_sum"):
+    '''Compute row sum or column sum of a given matrix'''
+    
+    n = len(D)
+    ds = np.empty(n)
+    for i in range(n):
+        if sumtype == "column_sum":
+            d = 0
+            for j in range(n):
+                d += float(D[j, i])
+            ds[i] = d
+        if sumtype == "row_sum":
+            d = 0
+            for j in range(n):
+                d += float(D[i, j])
+            ds[i] = d
+    return ds

@@ -171,7 +171,7 @@ def introduction():
     
     ## adjacency_matrix_2022
     data_file='data/csv_files/adjacency_matrix_31-12-2022.csv'
-    ch_data["adjacency_matrix_2019"] = read_Z(data_file, t=0)
+    ch_data["adjacency_matrix_2022"] = read_Z(data_file, t=0)
 
     return ch_data
 
