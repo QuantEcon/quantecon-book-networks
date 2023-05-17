@@ -10,6 +10,7 @@ This dataset is obtained and cleaned from [Harvard, CID Dataverse](https://datav
 
 Not updated.
 
+---
 
 ### `data/crude_oil_sitcr2_3330_yr2021`
 
@@ -29,6 +30,8 @@ Files:
 * regions-iso3c.csv
   * to look up the ISO3C country codes
 
+---
+
 ### `data/csv_files`
 
 #### `adjacency_matrix_31-12-2022.csv`
@@ -46,10 +49,13 @@ df = df[df["CBS bank type"] == "4R:Domestic banks(4B), excl. domestic positions"
 df = df[df["CBS reporting basis"] == "F:Immediate counterparty basis"]
 df = df[df["Balance sheet position"] == "C:Total claims"]
 ```
+---
 
 #### `forbes-global2000.csv`
 
 Not updated.
+
+---
 
 #### `(make|use)_(15|71)_2021.csv`
 
@@ -63,6 +69,8 @@ The attributes we want for `Total Industry Output` in the original dataset shoul
 
 We need to use the code of industries instead of names in `use_71_2021.csv` as the code is written in this way.
 
+---
+
 #### `(make|use)_114_aus_20-21.csv`
 
 Description:
@@ -72,3 +80,5 @@ Obtained from [ABS](https://www.abs.gov.au/statistics/economy/national-accounts/
 Representing domestic supply and use of commodities by 114 industries in Australia.
 
 The original data is in `.xlsx` which can be problematic when exporting to `.csv`. Need to be careful with the white spaces in numbers possibly.
+
+---
