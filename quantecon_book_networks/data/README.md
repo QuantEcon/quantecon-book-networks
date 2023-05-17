@@ -39,7 +39,7 @@ These data are obtained from the [BIS consolidated banking statistics](https://w
 
 These data are originally obtained in countries and then formed into one single file.
 
-We need to filter some attributes which represent the international private credit flows.
+We need to filter some attributes which represent the international private credit flows:
 
 ``` python
 df = df[df["CBS bank type"] == "4R:Domestic banks(4B), excl. domestic positions"]
@@ -68,5 +68,7 @@ We need to use the code of industries instead of names in `use_71_2021.csv` as t
 Description:
 
 Obtained from [ABS](https://www.abs.gov.au/statistics/economy/national-accounts/australian-national-accounts-input-output-tables/latest-release).
+
+Representing domestic supply and use of commodities by 114 industries in Australia.
 
 The original data is in `.xlsx` which can be problematic when exporting to `.csv`. Need to be careful with the white spaces in numbers possibly.
