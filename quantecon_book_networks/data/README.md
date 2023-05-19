@@ -53,6 +53,10 @@ df = df[df["Balance sheet position"] == "C:Total claims"]
 
 #### `forbes-global2000.csv`
 
+Descroption:
+
+This dataset is scrapped in [this](https://github.com/QuantEcon/high_dim_data/blob/main/cross_section/webscrape_forbes.ipynb) file
+
 Not updated.
 
 ---
