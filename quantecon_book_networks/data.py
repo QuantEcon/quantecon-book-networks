@@ -7,7 +7,7 @@ import json
 from pandas_datareader import wb
 
 ## Utilities
-def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2019.csv', t=10):
+def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2022.csv', t=10):
     """
     Build the Z matrix from the use table.
     
@@ -21,7 +21,7 @@ def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2019.csv', t=10):
 
     df2 = df1.replace(np.nan, 0)          # replace nan with 0
 
-    df3 = df2.replace("...", 0)          # replace ... with 0
+    df3 = df2.replace("---", 0)          # replace --- with 0
 
     countries = list(df3.index)
     countries = np.array(countries)
@@ -33,7 +33,7 @@ def read_Z(data_file='data/csv_files/adjacency_matrix_31-12-2019.csv', t=10):
     output = {'Z':Z,'Z_visual':Z_visual, 'countries':countries}
     return output
 
-def read_industry_Z(data_file='data/csv_files/use_15_2019.csv', 
+def read_industry_Z(data_file='data/csv_files/use_15_2021.csv', 
            N=15, 
            columnlist=['Name',
                        'Total Intermediate',
@@ -56,11 +56,11 @@ def read_industry_Z(data_file='data/csv_files/use_15_2019.csv',
         df3 = df2.drop(columns=columnlist)
     else:
         df3 = df2
-    df4 = df3.replace('...', 0)
+    df4 = df3.replace('---', 0)
     Z = np.asarray(df4.values.tolist(), dtype=np.float64)
     return Z
 
-def read_industry_X(data_file='data/csv_files/make_15_2019.csv',
+def read_industry_X(data_file='data/csv_files/make_15_2021.csv',
            colname='Total Industry Output',
            N=15):
     """
@@ -104,14 +104,15 @@ def introduction():
     ch_data = {}
 
     ## Crude oil
-    data_file = "data/crude_oil_sitcr2_3330_yr2019/data.csv"
+    data_file = "data/crude_oil_sitcr2_3330_yr2021/data.csv"
     data_file = pkg_resources.resource_stream(__name__, data_file)
     crude_oil = pd.read_csv(data_file, dtype={'product_id': str})
 
     exporters = crude_oil.groupby(by=["location_code"]).sum().sort_values("export_value", ascending=False)[:10].index
 
     importers = crude_oil.groupby(by=["partner_code"]).sum().sort_values("export_value", ascending=False)[:21].index
-    importers = set(importers.drop("ANS"))
+    # importers = set(importers.drop("ANS"))
+    importers = set(importers)
 
     # Aggregate Data for Rest of the World
     row_concord = {}
@@ -127,7 +128,7 @@ def introduction():
     chart_data = crude_oil.groupby(by=["location_code", "partner_code"]).sum().reset_index()
 
     # country data
-    data_file = "data/crude_oil_sitcr2_3330_yr2019/regions-iso3c.csv"
+    data_file = "data/crude_oil_sitcr2_3330_yr2021/regions-iso3c.csv"
     data_file = pkg_resources.resource_stream(__name__, data_file)
     cdata = pd.read_csv(data_file)
     country_names = cdata[["alpha-3","name"]].set_index("alpha-3").to_dict()['name']
@@ -168,9 +169,9 @@ def introduction():
     dfff = dfff.sort_values('Market Value', ascending=False)
     ch_data["forbes_global_2000"] = dfff
     
-    ## adjacency_matrix_2019
-    data_file='data/csv_files/adjacency_matrix_31-12-2019.csv'
-    ch_data["adjacency_matrix_2019"] = read_Z(data_file, t=0)
+    ## adjacency_matrix_2022
+    data_file='data/csv_files/adjacency_matrix_31-12-2022.csv'
+    ch_data["adjacency_matrix_2022"] = read_Z(data_file, t=0)
 
     return ch_data
 
@@ -207,14 +208,14 @@ def production():
 
     ch_data["us_sectors_15"] =  us_sectors_15
 
-    data_file = 'data/csv_files/use_71_2019.csv'
+    data_file = 'data/csv_files/use_71_2021.csv'
     Z_71 = read_industry_Z(
         data_file, N=71,
          columnlist=['Unnamed: 0', 'T001', 'F010', 'F02E', 'F02N', 
                              'F02R', 'F02S', 'F030', 'F040', 'F06C', 'F06E', 
                              'F06N', 'F06S', 'F07C', 'F07E', 'F07N', 'F07S', 
                              'F10C', 'F10E', 'F10N', 'F10S', 'T019'])
-    data_file = 'data/csv_files/make_71_2019.csv'
+    data_file = 'data/csv_files/make_71_2021.csv'
     X_71 = read_industry_X(data_file, N=71)
     A_71, F_71 = build_coefficient_matrices(Z_71, X_71)
 
@@ -296,12 +297,12 @@ def production():
 
     ch_data["us_sectors_71"] =  us_sectors_71
 
-    data_file='data/csv_files/use_114_aus_17-18.csv'
+    data_file='data/csv_files/use_114_aus_20-21.csv'
     Z_114 = read_industry_Z(data_file,
                  N=114,
                  columnlist=None)
     
-    data_file='data/csv_files/make_114_aus_17-18.csv'
+    data_file='data/csv_files/make_114_aus_20-21.csv'
     X_114 = read_industry_X(data_file, colname='total', N=114)
     A_114, F_114 = build_coefficient_matrices(Z_114, X_114)
 
@@ -427,7 +428,7 @@ def production():
 
     ## GDP growth rates and std. deviations
     varlist=['NY.GDP.MKTP.KD.ZG']; c='all'; s=1961; e=2020
-    countries = ['Canada', 'United States', 'United Kingdom', 'France', 'Japan', 
+    countries = ['Brazil', 'United States', 'United Kingdom', 'France', 'Japan', 
              'Indonesia', 'Argentina', 'Mexico', 'Australia', 'South Africa']
     
     gdp_df = wb.download(indicator=varlist, country=c, start=s, end=e)
