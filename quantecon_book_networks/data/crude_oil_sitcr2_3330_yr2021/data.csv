@@ -1,4 +1,4 @@
-,year,product_id,export_value,Quantity (in metric tons),partner_code,location_code
+,year,product_id,export_value,Quantity (in metric tons),location_code,partner_code
 0,2021,270900,50581430.0,    86028.100,AFG,ITA
 1,2021,270900,26900309.0,    60378.800,ALB,ITA
 2,2021,270900,703987331.0,  1258790.000,DZA,ITA
