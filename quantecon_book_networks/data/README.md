@@ -25,8 +25,8 @@ There is another file in `HS92` where you can look up the corresponding product 
 Files:
 
 * data.csv
-  * `location_code` is the ISO3C country code for the importer country.
-  * `partner_code` is the ISO3C country code for the exporter country.
+  * `location_code` is the ISO3C country code for the exporter country.
+  * `partner_code` is the ISO3C country code for the importer country.
 * regions-iso3c.csv
   * to look up the ISO3C country codes
 
