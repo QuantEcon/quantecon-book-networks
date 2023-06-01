@@ -2,17 +2,27 @@
 
 ---
 
-### `data/commercial-aircraft-sitcr2-7924-yr2019`
+### `data/commercial_aircraft`
+
+Time:
+
+2019
 
 Description:
 
 This dataset is obtained and cleaned from [Harvard, CID Dataverse](https://dataverse.harvard.edu/dataverse/atlas).
 
+The original file path was `/commercial_aircraft-sitcr2-7924-yr2019`
+
 Not updated.
 
 ---
 
-### `data/crude_oil_sitcr2_3330_yr2021`
+### `data/crude_oil`
+
+Time:
+
+2021
 
 Description:
 
@@ -34,7 +44,11 @@ Files:
 
 ### `data/csv_files`
 
-#### `adjacency_matrix_31-12-2022.csv`
+#### `adjacency_matrix.csv`
+
+Time:
+
+31/12/2022
 
 Description:
 
@@ -61,7 +75,11 @@ Not updated.
 
 ---
 
-#### `(make|use)_(15|71)_2021.csv`
+#### `(make|use)_(15|71).csv`
+
+Time:
+
+2021
 
 Description:
 
@@ -75,7 +93,11 @@ We need to use the code of industries instead of names in `use_71_2021.csv` as t
 
 ---
 
-#### `(make|use)_114_aus_20-21.csv`
+#### `(make|use)_114_aus.csv`
+
+Time:
+
+2020-2021
 
 Description:
 
