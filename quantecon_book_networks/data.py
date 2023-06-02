@@ -70,7 +70,7 @@ def read_industry_X(data_file='data/csv_files/make_15.csv',
     data_file = pkg_resources.resource_stream(__name__, data_file)
     df5 = pd.read_csv(data_file)
     X = np.asarray(df5[colname])
-    X = X[0:N].astype(np.float)
+    X = X[0:N].astype(np.float64)
     return X
 
 
