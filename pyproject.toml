@@ -15,7 +15,8 @@ dependencies = [
     'pandas',
     'matplotlib',
     'pandas-datareader',
-    'networkx'
+    'networkx',
+    'quantecon'
 ]
 
 [project.urls]
