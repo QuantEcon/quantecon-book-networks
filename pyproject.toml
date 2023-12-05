@@ -18,7 +18,7 @@ dependencies = [
     'networkx',
     # Book Dependency
     'quantecon',
-    'ot'
+    'POT'
 ]
 
 [project.urls]
