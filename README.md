@@ -2,6 +2,16 @@
 
 Python Package for https://networks.quantecon.org (Economic Networks)
 
+# Releases
+
+# 2023-Dec-06: v1.1
+
+DEPS: Add POTS as a dependency to support the lectures and enable automatic installation of dependencies
+
+# 2023-Nov-20: v1.0
+
+This is the first `v1` release to support the publication of the book
+
 ## Package Builder
 
 This package uses [flit]() to build and publish updates to PyPI
