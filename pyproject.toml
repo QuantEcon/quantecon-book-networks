@@ -16,9 +16,6 @@ dependencies = [
     'matplotlib',
     'pandas-datareader',
     'networkx',
-    # Book Dependency
-    'quantecon',
-    'POT'
 ]
 
 [project.urls]
