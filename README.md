@@ -4,6 +4,10 @@ Python Package for https://networks.quantecon.org (Economic Networks)
 
 # Releases
 
+# 2025-Feb-18: v1.2
+
+Removed POTS dependency as no longer building a jupyter-book on the companion site, and enables package to be `wasm` compatible. 
+
 # 2023-Dec-06: v1.1
 
 DEPS: Add POTS as a dependency to support the lectures and enable automatic installation of dependencies
