@@ -5,6 +5,7 @@ import pandas as pd
 import networkx as nx
 import json
 from pandas_datareader import wb
+import wbgapi as wbg
 
 ## Utilities
 def read_Z(data_file='data/csv_files/adjacency_matrix.csv', t=10):
@@ -431,8 +432,32 @@ def production():
     countries = ['Brazil', 'United States', 'United Kingdom', 'France', 'Japan', 
              'Indonesia', 'Argentina', 'Mexico', 'Australia', 'South Africa']
     
-    gdp_df = wb.download(indicator=varlist, country=c, start=s, end=e)
-    gdp_df = gdp_df.unstack(0)["NY.GDP.MKTP.KD.ZG"][countries]
+    # gdp_df = wb.download(indicator=varlist, country=c, start=s, end=e)
+    # gdp_df = gdp_df.unstack(0)["NY.GDP.MKTP.KD.ZG"][countries]
+
+    # replacing code above with wbgapi
+    countries = ['BRA', 'USA', 'GBR', 'FRA', 'JPN', 
+         'IDN', 'ARG', 'MEX', 'AUS', 'ZAF']
+    df = wbg.data.DataFrame("NY.GDP.MKTP.KD.ZG", countries, time=range(s, e+1, 1))
+    # match the dataframe gdp_df
+    cntry_mapping = {
+        'BRA' : 'Brazil',
+        'USA' : 'United States',
+        'GBR' : 'United Kingdom',  
+        'FRA' : 'France',
+        'JPN' : 'Japan',
+        'IDN' : 'Indonesia',
+        'ARG' : 'Argentina',
+        'MEX' : 'Mexico',
+        'AUS' : 'Australia',
+        'ZAF' : 'South Africa'  
+    }
+    df.index.name = 'country'
+    df.index = df.index.map(lambda x: cntry_mapping[x])
+    df.columns.name = 'year'
+    df.columns = df.columns.map(lambda x: x.replace("YR",""))
+    df = df.T
+    gdp_df = df[countries] # return the same order
 
     ch_data['gdp_df'] = gdp_df
 
