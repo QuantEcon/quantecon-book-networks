@@ -436,9 +436,9 @@ def production():
     # gdp_df = gdp_df.unstack(0)["NY.GDP.MKTP.KD.ZG"][countries]
 
     # replacing code above with wbgapi
-    countries = ['BRA', 'USA', 'GBR', 'FRA', 'JPN', 
-         'IDN', 'ARG', 'MEX', 'AUS', 'ZAF']
-    df = wbg.data.DataFrame("NY.GDP.MKTP.KD.ZG", countries, time=range(s, e+1, 1))
+    countries_iso3c = ['BRA', 'USA', 'GBR', 'FRA', 'JPN', 
+                 'IDN', 'ARG', 'MEX', 'AUS', 'ZAF']
+    df = wbg.data.DataFrame("NY.GDP.MKTP.KD.ZG", countries_iso3c, time=range(s, e+1, 1))
     # match the dataframe gdp_df
     cntry_mapping = {
         'BRA' : 'Brazil',
