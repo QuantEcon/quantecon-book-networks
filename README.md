@@ -4,6 +4,10 @@ Python Package for https://networks.quantecon.org (Economic Networks)
 
 # Releases
 
+# 2025-March-26: v1.3
+
+BUG: Fix one instance where pandas_datareader use was causing a FutureWarning to be triggered by pandas
+
 # 2025-Feb-18: v1.2
 
 Removed POTS dependency as no longer building a jupyter-book on the companion site, and enables package to be `wasm` compatible. 
