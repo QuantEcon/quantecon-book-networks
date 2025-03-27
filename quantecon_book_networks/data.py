@@ -432,13 +432,16 @@ def production():
     countries = ['Brazil', 'United States', 'United Kingdom', 'France', 'Japan', 
              'Indonesia', 'Argentina', 'Mexico', 'Australia', 'South Africa']
     
+    # previous solution for pandas_datareader
+    # from pandas_datareader import wb
     # gdp_df = wb.download(indicator=varlist, country=c, start=s, end=e)
     # gdp_df = gdp_df.unstack(0)["NY.GDP.MKTP.KD.ZG"][countries]
 
-    # replacing code above with wbgapi
-    countries = ['BRA', 'USA', 'GBR', 'FRA', 'JPN', 
-         'IDN', 'ARG', 'MEX', 'AUS', 'ZAF']
-    df = wbg.data.DataFrame("NY.GDP.MKTP.KD.ZG", countries, time=range(s, e+1, 1))
+    # replacing code above with wbgapi but matching return structure
+
+    countries_iso3c = ['BRA', 'USA', 'GBR', 'FRA', 'JPN', 
+                 'IDN', 'ARG', 'MEX', 'AUS', 'ZAF']
+    df = wbg.data.DataFrame("NY.GDP.MKTP.KD.ZG", countries_iso3c, time=range(s, e+1, 1))
     # match the dataframe gdp_df
     cntry_mapping = {
         'BRA' : 'Brazil',
