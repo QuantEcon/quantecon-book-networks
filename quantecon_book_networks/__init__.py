@@ -5,6 +5,6 @@ Website: https://github.com/quantecon/book-networks
 
 """
 
-__version__ = '1.3.1'
+__version__ = '1.4'
 
 from .configure import config

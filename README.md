@@ -4,6 +4,10 @@ Python Package for https://networks.quantecon.org (Economic Networks)
 
 # Releases
 
+# 2025-Apr-24: v1.4
+
+BUG: Fix dependency by including `wbgapi` package
+
 # 2025-March-26: v1.3
 
 BUG: Fix one instance where pandas_datareader use was causing a FutureWarning to be triggered by pandas
