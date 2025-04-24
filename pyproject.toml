@@ -16,6 +16,7 @@ dependencies = [
     'matplotlib',
     'pandas-datareader',
     'networkx',
+    'wbgapi',
 ]
 
 [project.urls]
