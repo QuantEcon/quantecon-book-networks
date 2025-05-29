@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import json
-from pandas_datareader import wb
 import wbgapi as wbg
 
 ## Utilities
@@ -487,17 +486,22 @@ def markov_chains_and_networks():
             ch_data (dict): Dictionary of data names and associated data objects. Note: some data objects are further nested as dictionaries. 
     """
 
-    data = wb.get_countries()
-    data = data[data['region'] != 'Aggregates']
+    # See data-markov-chains-convert.ipynb for data generation
+    # from pandas_datareader import wb
+    # data = wb.get_countries()
+    # data = data[data['region'] != 'Aggregates']
+    data = pd.read_csv("data/markov_chains_networks/wb_countries.csv")
     countries = list(data['iso2c'])
     ind = ['NY.GDP.PCAP.CD']
 
     # NY.GDP.PCAP.CD GDP per capita in current US$ and NY.GDP.PCAP.PP.CD GDP per capita in current international $
-    dat = wb.download(indicator=ind, country=countries, start=1960, end=2019, errors="ignore")
+    # dat = wb.download(indicator=ind, country=countries, start=1960, end=2019, errors="ignore")
+    dat = pd.read_csv("data/markov_chains_networks/wb_gdppc.csv", index_col=["country","year"])
     dat = dat.reset_index()
     dat.columns = 'country', 'year', 'gdppc'
 
-    dat0 = wb.download(indicator=ind, country='WLD', start=1960, end=2019, errors="ignore")
+    # dat0 = wb.download(indicator=ind, country='WLD', start=1960, end=2019, errors="ignore")
+    dat0 = pd.read_csv("data/markov_chains_networks/wb_gdppc_wld.csv", index_col=["country","year"])
     dat0 = dat0.reset_index()
     dat0.columns = 'country', 'year', 'gdppc_w'
  
