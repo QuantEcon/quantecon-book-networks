@@ -1,10 +1,20 @@
-import pkg_resources
-from re import X
+from importlib.resources import files
 import numpy as np
 import pandas as pd
 import networkx as nx
 import json
 import wbgapi as wbg
+
+
+def _resource_stream(relative_path):
+    """
+    Open a packaged data file as a binary stream.
+
+    Replacement for the deprecated ``pkg_resources.resource_stream`` using the
+    stdlib ``importlib.resources``.
+    """
+    return files(__package__).joinpath(relative_path).open("rb")
+
 
 ## Utilities
 def read_Z(data_file='data/csv_files/adjacency_matrix.csv', t=10):
@@ -14,7 +24,7 @@ def read_Z(data_file='data/csv_files/adjacency_matrix.csv', t=10):
     * Z[i, j] = sales from sector i to sector j
     
     """
-    data_file = pkg_resources.resource_stream(__name__, data_file)
+    data_file = _resource_stream(data_file)
 
     df1 = pd.read_csv(data_file)
     df1 = df1.set_index("country")
@@ -49,7 +59,7 @@ def read_industry_Z(data_file='data/csv_files/use_15.csv',
     * Z[i, j] = sales from sector i to sector j
     
     """
-    data_file = pkg_resources.resource_stream(__name__, data_file)
+    data_file = _resource_stream(data_file)
     df1 = pd.read_csv(data_file)
     df2 = df1[:N]
     if columnlist != None:
@@ -67,7 +77,7 @@ def read_industry_X(data_file='data/csv_files/make_15.csv',
     Read total industry sales column from the make table.
 
     """
-    data_file = pkg_resources.resource_stream(__name__, data_file)
+    data_file = _resource_stream(data_file)
     df5 = pd.read_csv(data_file)
     X = np.asarray(df5[colname])
     X = X[0:N].astype(np.float64)
@@ -105,7 +115,7 @@ def introduction():
 
     ## Crude oil
     data_file = "data/crude_oil/data.csv"
-    data_file = pkg_resources.resource_stream(__name__, data_file)
+    data_file = _resource_stream(data_file)
     crude_oil = pd.read_csv(data_file, dtype={'product_id': str})
 
     exporters = crude_oil[["export_value", "location_code"]].groupby(by=["location_code"]).sum().sort_values("export_value", ascending=False)[:10].index
@@ -129,7 +139,7 @@ def introduction():
 
     # country data
     data_file = "data/crude_oil/regions-iso3c.csv"
-    data_file = pkg_resources.resource_stream(__name__, data_file)
+    data_file = _resource_stream(data_file)
     cdata = pd.read_csv(data_file)
     country_names = cdata[["alpha-3","name"]].set_index("alpha-3").to_dict()['name']
     country_names["ROW"] = "Rest of World"
@@ -148,14 +158,13 @@ def introduction():
 
     ## aircraft_network
     data_file = "data/commercial_aircraft/aircraft_network.gexf"
-    data_file = pkg_resources.resource_stream(__name__, data_file)
+    data_file = _resource_stream(data_file)
 
     ch_data["aircraft_network"] = nx.read_gexf(data_file)
 
     data_file = "data/commercial_aircraft/aircraft_network_layout.json"
-    data_file = pkg_resources.resource_stream(__name__, data_file)
-    f = open(data_file.name, "r")
-    data = json.loads(f.read())
+    with _resource_stream(data_file) as f:
+        data = json.loads(f.read())
     pos = {}
     for nd in data['nodes']:
         pos[nd['id']] = np.array([nd['x'], nd['y']])
@@ -163,7 +172,7 @@ def introduction():
     
     ## forbes-global2000
     data_file = 'data/csv_files/forbes-global2000.csv'
-    data_file = pkg_resources.resource_stream(__name__, data_file)
+    data_file = _resource_stream(data_file)
     dfff = pd.read_csv(data_file)
     dfff = dfff[['Country', 'Sales', 'Profits', 'Assets', 'Market Value']]
     dfff = dfff.sort_values('Market Value', ascending=False)
@@ -495,13 +504,13 @@ def markov_chains_and_networks():
 
     # NY.GDP.PCAP.CD GDP per capita in current US$ and NY.GDP.PCAP.PP.CD GDP per capita in current international $
     # dat = wb.download(indicator=ind, country=countries, start=1960, end=2019, errors="ignore")
-    data_file = pkg_resources.resource_stream(__name__, "data/markov_chains_networks/wb_gdppc.csv")
+    data_file = _resource_stream("data/markov_chains_networks/wb_gdppc.csv")
     dat = pd.read_csv(data_file, index_col=["country","year"])
     dat = dat.reset_index()
     dat.columns = 'country', 'year', 'gdppc'
 
     # dat0 = wb.download(indicator=ind, country='WLD', start=1960, end=2019, errors="ignore")
-    data_file = pkg_resources.resource_stream(__name__, "data/markov_chains_networks/wb_gdppc_wld.csv")
+    data_file = _resource_stream("data/markov_chains_networks/wb_gdppc_wld.csv")
     dat0 = pd.read_csv(data_file, index_col=["country","year"])
     dat0 = dat0.reset_index()
     dat0.columns = 'country', 'year', 'gdppc_w'
