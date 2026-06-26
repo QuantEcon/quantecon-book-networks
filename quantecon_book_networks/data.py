@@ -163,8 +163,8 @@ def introduction():
     ch_data["aircraft_network"] = nx.read_gexf(data_file)
 
     data_file = "data/commercial_aircraft/aircraft_network_layout.json"
-    data_file = _resource_stream(data_file)
-    data = json.loads(data_file.read())
+    with _resource_stream(data_file) as f:
+        data = json.loads(f.read())
     pos = {}
     for nd in data['nodes']:
         pos[nd['id']] = np.array([nd['x'], nd['y']])
