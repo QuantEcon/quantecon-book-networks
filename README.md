@@ -4,6 +4,10 @@ Python Package for https://networks.quantecon.org (Economic Networks)
 
 # Releases
 
+# 2026-Jun-26: v1.6
+
+FIX: migrate off `pkg_resources` to the stdlib `importlib.resources` so the package imports on newer stacks (e.g. anaconda 2026.06, which drops the bundled `pkg_resources` shim). Fixes #21.
+
 # 2025-May-29: v1.5
 
 FIX: remove use of pandas_datareader as it was causing `FutureWarning` issues globally. 
